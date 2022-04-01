@@ -18,6 +18,7 @@
     "express": "^4.17.3",
     "formidable": "^2.0.1",
     "mongoose": "^6.2.9",
-    "nodemon": "^2.0.15"
+    "nodemon": "^2.0.15",
+    "cors": "^2.8.5"
   }
 }

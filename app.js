@@ -4,11 +4,21 @@ import productRoutes from "./routes/product.js";
 import bodyParser from "body-parser";
 import mongoose from "mongoose";
 
+const cors = require('cors') // Import cors
+
+// Begin Cors Setup
+var corsOptions = {
+   origin: 'http://localhost:3000',
+   optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
+}
+
 // Config
 dotenv.config();
 const app = express();
 const port = process.env.PORT || 8000;
 app.use(bodyParser.json());
+app.use(cors(corsOptions))
+
 
 // Connection
 mongoose
