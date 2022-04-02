@@ -1,14 +1,18 @@
 import express from "express";
-import { create, get, getBySlug } from "../controllers/product.js";
+import { create, get, getBySlug, getByCategorySlug } from "../controllers/product.js";
 const router = express.Router();
 
-// products
+// get products
 router.get("/products", get);
 
-// product
+// get product
 router.get("/product/:slug", getBySlug);
+
+// get related products
+router.get("/products/:categorySlug", getByCategorySlug);
 
 // add product
 router.post("/products", create);
+
 
 module.exports = router;

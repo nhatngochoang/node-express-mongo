@@ -34,9 +34,20 @@ export const getBySlug = async (req, res) => {
       // cookies
    } = req;
    // const token = cookies.token
-   console.log('slug:' + slug);
    try {
       const product = await Product.findById(slug);
+      res.status(200).json(product);
+   } catch (err) {
+      res.status(500).json(err);
+   }
+}
+
+export const getByCategorySlug = async (req, res) => {
+   const {
+      params: { categorySlug },
+   } = req;
+   try {
+      const product = await Product.find({ categorySlug: categorySlug });
       res.status(200).json(product);
    } catch (err) {
       res.status(500).json(err);
