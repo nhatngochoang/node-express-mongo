@@ -6,6 +6,7 @@ import colorRoutes from "./routes/color.js";
 import policyRoutes from "./routes/policy.js";
 import sizeRoutes from "./routes/size.js";
 import sliderRoutes from "./routes/slider.js";
+import orderRoutes from "./routes/order.js";
 
 
 import bodyParser from "body-parser";
@@ -48,6 +49,8 @@ app.use("/api", colorRoutes);
 app.use("/api", policyRoutes);
 app.use("/api", sizeRoutes);
 app.use("/api", sliderRoutes);
+app.use("/api", orderRoutes);
+
 
 
 app.listen(port, () => {
