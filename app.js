@@ -1,6 +1,13 @@
 import express from "express";
 import dotenv from "dotenv";
 import productRoutes from "./routes/product.js";
+import categoryRoutes from "./routes/category.js";
+import colorRoutes from "./routes/color.js";
+import policyRoutes from "./routes/policy.js";
+import sizeRoutes from "./routes/size.js";
+import sliderRoutes from "./routes/slider.js";
+
+
 import bodyParser from "body-parser";
 import mongoose from "mongoose";
 
@@ -36,6 +43,12 @@ mongoose.connection.on("Error", (err) => {
 });
 // Routes
 app.use("/api", productRoutes);
+app.use("/api", categoryRoutes);
+app.use("/api", colorRoutes);
+app.use("/api", policyRoutes);
+app.use("/api", sizeRoutes);
+app.use("/api", sliderRoutes);
+
 
 app.listen(port, () => {
    console.log("Server listening on port " + port);
