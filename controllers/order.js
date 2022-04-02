@@ -18,6 +18,18 @@ export const get = async (req, res) => {
    }
 };
 
+export const getByID = async (req, res) => {
+   try {
+      const {
+         params: { id },
+      } = req;
+      const orders = await Order.findById(id);
+      res.status(201).json(orders);
+   } catch (err) {
+      res.status(500).json(err);
+   }
+};
+
 export const deleteOrder = async (req, res) => {
    try {
       const {
