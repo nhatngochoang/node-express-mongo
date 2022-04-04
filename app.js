@@ -8,6 +8,8 @@ import sizeRoutes from "./routes/size.js";
 import sliderRoutes from "./routes/slider.js";
 import orderRoutes from "./routes/order.js";
 import authRoutes from "./routes/auth.js";
+import userRoutes from "./routes/user.js";
+
 
 
 
@@ -55,6 +57,8 @@ app.use("/api", policyRoutes);
 app.use("/api", sizeRoutes);
 app.use("/api", sliderRoutes);
 app.use("/api", orderRoutes);
+app.use("/api", userRoutes);
+
 // AUTHENTICATION 💣 Signup, Login
 app.use("/v1/auth", authRoutes)
 // AUTHORIZATION  💣 phân quyền
