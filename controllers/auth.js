@@ -100,32 +100,46 @@ const authController = {
 
    // REFRESH TOKEN
    refreshToken: async (req, res) => {
-      // get refresh token from user
-      const refreshToken = req.cookies.refreshToken
+      try {
+         // get refresh token from user
+         const refreshToken = req.cookies.refreshToken
 
-      if (!refreshToken) return res.status(401).json("You're not authenticated")
-      //💣 redis để các refresh token khác nhau 
-      if (!refreshTokens.includes(refreshToken))
-         return res.status(403).json("Refresh token is not valid")
-      jwt.verify(refreshToken, process.env.JWT_REFRESH_KEY, (err, user) => {
-         if (err) return res.status(401).json(err)
+         if (!refreshToken) return res.status(401).json("You're not authenticated")
+         //💣 redis để các refresh token khác nhau 
+         if (!refreshTokens.includes(refreshToken))
+            return res.status(403).json("Refresh token is not valid")
+         jwt.verify(refreshToken, process.env.JWT_REFRESH_KEY, (err, user) => {
+            if (err) return res.status(401).json(err)
 
-         refreshTokens = refreshTokens.filter(token => token !== refreshToken) // remove old token
+            refreshTokens = refreshTokens.filter(token => token !== refreshToken) // remove old token
 
-         // create 2 new tokens
-         const newAccessToken = authController.generateAccessToken(user)
-         const newRefreshToken = authController.generateRefreshToken(user)
-         refreshTokens.push(newRefreshToken) // add new token
-         res.cookie("refreshToken", newRefreshToken, {
-            httpOnly: true,
-            secure: false,
-            path: "/",
-            sameSite: "strict",
-         });
-         res.status(200).json({ accessToken: newAccessToken }) // use this new access token
-      })
+            // create 2 new tokens
+            const newAccessToken = authController.generateAccessToken(user)
+            const newRefreshToken = authController.generateRefreshToken(user)
+            refreshTokens.push(newRefreshToken) // add new token
+            res.cookie("refreshToken", newRefreshToken, {
+               httpOnly: true,
+               secure: false,
+               path: "/",
+               sameSite: "strict",
+            });
+            res.status(200).json({ accessToken: newAccessToken }) // use this new access token
+         })
+      } catch (err) {
+         console.log(err);
+      }
+   },
 
+   // LOG OUT
+   logoutUser: async (req, res) => {
+      try {
+         res.clearCookie("refreshToken");
+         refreshTokens = []
+         res.status(200).json("Logged out successfully!");
+         // delete access token in REDUX
+      } catch (error) {
+         res.status(401).json("Log out failed!")
+      }
    }
 }
-
 module.exports = authController
