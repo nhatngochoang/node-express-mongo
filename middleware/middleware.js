@@ -18,6 +18,17 @@ const middleware = {
       } else {
          res.status(401).json("You're not authenticated")
       }
+   },
+
+   // admin
+   verifyTokenAdmin: (req, res, next) => {
+      middleware.verifyToken(req, res, () => {
+         if (req.user.id === req.params.id || req.user.isAdmin) { // delete yourself or admin can delete
+            next()
+         } else {
+            res.status(403).json("Not allowed to delete user")
+         }
+      })
    }
 }
 
