@@ -25,3 +25,16 @@ git commit -m "message" .gitignore
 ```
 
 # JSON WEB TOKEN 🍏 ➥ CMND
+
+git rm .env --cached
+git rm env.local --cached
+git rm env.staging --cached
+git commit -m "Stopped tracking .env File"
+
+# STORE TOKEN 🍎   
+➥ 1.Local Storage ➥ XSS
+➥ 2.HTTPONLY Cookie ➥ CSRF ⚔️ SAMESITE
+
+🍋🍋🍋 REDUX STORE ⚙️ ACCESS TOKEN + HTTPONLY Cookie ⚙️ REFRESH TOKEN
+
+⚓️ BFF PATTERN ➥ SAFE

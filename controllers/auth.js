@@ -24,6 +24,28 @@ const authController = {
       }
    },
 
+   //GENERATE ACCESS TOKEN
+   generateAccessToken: (user) => {
+      return jwt.sign({
+         id: user.id,
+         isAdmin: user.isAdmin
+      },
+         process.env.JWT_ACCESS_KEY,
+         { expiresIn: "30s" }
+      )
+   },
+
+   //GENERATE REFRESH TOKEN
+   generateRefreshToken: (user) => {
+      return jwt.sign({
+         id: user.id,
+         isAdmin: user.isAdmin
+      },
+         process.env.JWT_REFRESH_KEY,
+         { expiresIn: "30d" }
+      )
+   },
+
    //LOGIN
    loginUser: async (req, res) => {
       try {
@@ -42,13 +64,17 @@ const authController = {
          }
          // login success 
          if (user && validPassword) {
-            const accessToken = jwt.sign({
-               id: user.id,
-               isAdmin: user.isAdmin
-            },
-               process.env.JWT_ACCESS_KEY,
-               { expiresIn: "30s" }
-            )
+            const accessToken = authController.generateAccessToken(user)
+
+            const refreshToken = authController.generateRefreshToken(user)
+
+            res.cookie("refreshToken", refreshToken, {
+               httpOnly: true,
+               secure: false, // set true when deploy
+               path: "/",
+               sameSite: "strict", // only req from current site
+            });
+
             const { password, ...others } = user._doc; // not include password in response
             res.status(200).json({ ...others, accessToken })
             // const accessToken = authController.generateAccessToken(user);
