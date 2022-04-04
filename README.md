@@ -11,6 +11,9 @@ npm i --save nodemon express babel-cli babel-preset-env babel-preset-stage-0 dot
 npm i body-parser --save
 npm i mongoose --save
 npm i formidable --save
+npm i cors --save
+npm i cors --save
+npm i bcrypt cookie-parser jsonwebtoken --save
 ```
 
 # Add .gitignore

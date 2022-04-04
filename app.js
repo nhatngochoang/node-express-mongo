@@ -7,12 +7,15 @@ import policyRoutes from "./routes/policy.js";
 import sizeRoutes from "./routes/size.js";
 import sliderRoutes from "./routes/slider.js";
 import orderRoutes from "./routes/order.js";
+import authRoutes from "./routes/auth.js";
+
 
 
 import bodyParser from "body-parser";
 import mongoose from "mongoose";
 
 const cors = require('cors') // Import cors
+const cookieParser = require('cookie-parser')
 
 // Begin Cors Setup
 var corsOptions = {
@@ -26,6 +29,8 @@ const app = express();
 const port = process.env.PORT || 8000;
 app.use(bodyParser.json());
 app.use(cors(corsOptions))
+app.use(cookieParser())
+// app.use(express.json())
 
 
 // Connection
@@ -50,9 +55,14 @@ app.use("/api", policyRoutes);
 app.use("/api", sizeRoutes);
 app.use("/api", sliderRoutes);
 app.use("/api", orderRoutes);
+app.use("/v1/auth", authRoutes)
 
 
 
 app.listen(port, () => {
    console.log("Server listening on port " + port);
 });
+
+
+// AUTHENTICATION 💣 Signup, Login
+// AUTHORIZATION  💣 phân quyền

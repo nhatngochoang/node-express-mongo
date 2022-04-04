@@ -21,8 +21,9 @@ const OrderSchema = new mongoose.Schema(
          default: 0,
       },
       method: {
-         type: Number,
+         type: String,
          required: true,
+         maxlength: 200,
       },
    },
    { timestamps: true }
