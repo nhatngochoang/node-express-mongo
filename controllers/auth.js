@@ -49,7 +49,7 @@ const authController = {
                process.env.JWT_ACCESS_KEY,
                { expiresIn: "30s" }
             )
-            const { password, ...others } = user._doc;
+            const { password, ...others } = user._doc; // not include password in response
             res.status(200).json({ ...others, accessToken })
             // const accessToken = authController.generateAccessToken(user);
             // const refreshToken = authController.generateRefreshToken(user);
