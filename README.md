@@ -23,3 +23,5 @@ npm i bcrypt cookie-parser jsonwebtoken --save
 git add .gitignore
 git commit -m "message" .gitignore
 ```
+
+# JSON WEB TOKEN 🍏 ➥ CMND

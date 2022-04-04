@@ -1,5 +1,6 @@
 import User from "../models/user.js";
 const bcrypt = require('bcrypt')
+const jwt = require('jsonwebtoken')
 
 const authController = {
    // REGISTER
@@ -39,9 +40,17 @@ const authController = {
          if (!validPassword) {
             return res.status(404).json("Wrong password");
          }
-         // pass 
+         // login success 
          if (user && validPassword) {
-            res.status(200).json(user)
+            const accessToken = jwt.sign({
+               id: user.id,
+               isAdmin: user.isAdmin
+            },
+               process.env.JWT_ACCESS_KEY,
+               { expiresIn: "30s" }
+            )
+            const { password, ...others } = user._doc;
+            res.status(200).json({ ...others, accessToken })
             // const accessToken = authController.generateAccessToken(user);
             // const refreshToken = authController.generateRefreshToken(user);
             // refreshTokens.push(refreshToken);
