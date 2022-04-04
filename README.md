@@ -38,3 +38,7 @@ git commit -m "Stopped tracking .env File"
 🍋🍋🍋 REDUX STORE ⚙️ ACCESS TOKEN + HTTPONLY Cookie ⚙️ REFRESH TOKEN
 
 ⚓️ BFF PATTERN ➥ SAFE
+
+# REFRESH TOKEN
+🛰 access token (in headers) ➨ identify who are you
+🚀 refresh token (in cookies) ➨ if access token expires, make a new access token

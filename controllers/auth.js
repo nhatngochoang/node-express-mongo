@@ -2,6 +2,8 @@ import User from "../models/user.js";
 const bcrypt = require('bcrypt')
 const jwt = require('jsonwebtoken')
 
+let refreshTokens = [];
+
 const authController = {
    // REGISTER
    registerUser: async (req, res) => {
@@ -68,6 +70,8 @@ const authController = {
 
             const refreshToken = authController.generateRefreshToken(user)
 
+            refreshTokens.push(refreshToken)
+
             res.cookie("refreshToken", refreshToken, {
                httpOnly: true,
                secure: false, // set true when deploy
@@ -92,6 +96,35 @@ const authController = {
       } catch (err) {
          res.status(500).json(err);
       }
+   },
+
+   // REFRESH TOKEN
+   refreshToken: async (req, res) => {
+      // get refresh token from user
+      const refreshToken = req.cookies.refreshToken
+
+      if (!refreshToken) return res.status(401).json("You're not authenticated")
+      //💣 redis để các refresh token khác nhau 
+      if (!refreshTokens.includes(refreshToken))
+         return res.status(403).json("Refresh token is not valid")
+      jwt.verify(refreshToken, process.env.JWT_REFRESH_KEY, (err, user) => {
+         if (err) return res.status(401).json(err)
+
+         refreshTokens = refreshTokens.filter(token => token !== refreshToken) // remove old token
+
+         // create 2 new tokens
+         const newAccessToken = authController.generateAccessToken(user)
+         const newRefreshToken = authController.generateRefreshToken(user)
+         refreshTokens.push(newRefreshToken) // add new token
+         res.cookie("refreshToken", newRefreshToken, {
+            httpOnly: true,
+            secure: false,
+            path: "/",
+            sameSite: "strict",
+         });
+         res.status(200).json({ accessToken: newAccessToken }) // use this new access token
+      })
+
    }
 }
 
