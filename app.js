@@ -55,14 +55,12 @@ app.use("/api", policyRoutes);
 app.use("/api", sizeRoutes);
 app.use("/api", sliderRoutes);
 app.use("/api", orderRoutes);
+// AUTHENTICATION 💣 Signup, Login
 app.use("/v1/auth", authRoutes)
-
+// AUTHORIZATION  💣 phân quyền
 
 
 app.listen(port, () => {
    console.log("Server listening on port " + port);
 });
 
-
-// AUTHENTICATION 💣 Signup, Login
-// AUTHORIZATION  💣 phân quyền
