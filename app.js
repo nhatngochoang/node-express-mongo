@@ -60,7 +60,7 @@ app.use("/api", orderRoutes);
 app.use("/api", userRoutes);
 
 // AUTHENTICATION 💣 Signup, Login
-app.use("/v1/auth", authRoutes)
+app.use("/api/auth", authRoutes)
 // AUTHORIZATION  💣 phân quyền
 
 
