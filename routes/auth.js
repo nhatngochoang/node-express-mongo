@@ -16,5 +16,8 @@ router.post("/refresh", authController.refreshToken);
 // logout
 router.post("/logout", middleware.verifyToken, authController.logoutUser);
 
+// loginJWT
+router.post("/loginJWT", middleware.verifyLogin);
+
 
 module.exports = router;

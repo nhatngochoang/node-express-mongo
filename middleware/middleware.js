@@ -1,4 +1,5 @@
 const jwt = require('jsonwebtoken');
+const fs = require('fs');
 
 const middleware = {
 
@@ -29,7 +30,19 @@ const middleware = {
             res.status(403).json("Not allowed to delete user")
          }
       })
-   }
+   },
+
+   // loginJWT
+   verifyLogin: (req, res, next) => {
+      if (req.body.username === "usertest" && req.body.password === "123456789") {
+         const cert = fs.readFileSync('./jwt/jwtRS256.key')
+         const jwtPayload = { username: req.body.username }
+         const token = jwt.sign(jwtPayload, cert, { algorithm: 'RS256', expiresIn: '30s' })
+         res.status(200).send(token)
+      } else {
+         res.status(400).send("Bad Request!")
+      }
+   },
 }
 
 module.exports = middleware
