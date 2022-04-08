@@ -20,6 +20,11 @@ const userController = {
       } catch (err) {
          res.status(500).json(err);
       }
+   },
+
+   // get user info
+   getUserInfo: async (req, res) => {
+      res.status(200).send("success")
    }
 }
 

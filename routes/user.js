@@ -10,5 +10,8 @@ router.get("/users", middleware.verifyToken, userController.getAllUsers);
 // delete
 router.delete("/users/:id", middleware.verifyTokenAdmin, userController.deleteUser);
 
+// authorization
+router.get("/user-info", middleware.verifyAuthorization, userController.getUserInfo);
+
 
 module.exports = router;
