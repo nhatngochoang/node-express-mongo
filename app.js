@@ -10,9 +10,6 @@ import orderRoutes from "./routes/order.js";
 import authRoutes from "./routes/auth.js";
 import userRoutes from "./routes/user.js";
 
-
-
-
 import bodyParser from "body-parser";
 import mongoose from "mongoose";
 
@@ -32,7 +29,7 @@ const port = process.env.PORT || 8000;
 app.use(bodyParser.json());
 app.use(cors(corsOptions))
 app.use(cookieParser())
-// app.use(express.json())
+app.use(express.json())
 
 
 // Connection
