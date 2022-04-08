@@ -12,11 +12,18 @@ npm i body-parser --save
 npm i mongoose --save
 npm i formidable --save
 npm i cors --save
-npm i cors --save
+npm i fs
 npm i bcrypt cookie-parser jsonwebtoken --save
 npm i jwt-decode
 npm i redux-persist
 ```
+
+# Create jwt_key
+```bash
+ssh-keygen -t rsa -b 4096 -m PEM -f jwtRS256.key
+```
+# Format public key
+openssl rsa -in jwtRS256.key -pubout -outform PEM -out jwtRS256.key.pub
 
 # Add .gitignore
 
