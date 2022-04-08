@@ -14,6 +14,8 @@ npm i formidable --save
 npm i cors --save
 npm i cors --save
 npm i bcrypt cookie-parser jsonwebtoken --save
+npm i jwt-decode
+npm i redux-persist
 ```
 
 # Add .gitignore
