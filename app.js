@@ -12,6 +12,7 @@ import userRoutes from "./routes/user.js";
 
 import bodyParser from "body-parser";
 import mongoose from "mongoose";
+import { API_PATH } from "./constants/routeLink.js";
 
 const cors = require('cors') // Import cors
 const cookieParser = require('cookie-parser')
@@ -47,7 +48,7 @@ mongoose.connection.on("Error", (err) => {
    console.log("Error: " + err.message);
 });
 // Routes
-app.use("/api", productRoutes);
+app.use(API_PATH, productRoutes);
 app.use("/api", categoryRoutes);
 app.use("/api", colorRoutes);
 app.use("/api", policyRoutes);
