@@ -12,6 +12,7 @@ import userRoutes from "./routes/user.js";
 
 import bodyParser from "body-parser";
 import mongoose from "mongoose";
+import path from 'path'
 import { API_PATH } from "./constants/routeLink.js";
 
 const cors = require('cors') // Import cors
@@ -61,6 +62,8 @@ app.use("/api", userRoutes);
 app.use("/api/auth", authRoutes)
 // AUTHORIZATION  💣 phân quyền
 
+// PUBLIC
+app.use('/public', express.static(path.join(__dirname, '/public')))
 
 app.listen(port, () => {
    console.log("Server listening on port " + port);
