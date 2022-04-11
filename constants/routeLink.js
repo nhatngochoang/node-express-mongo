@@ -3,4 +3,5 @@ module.exports = Object.freeze({
    PRODUCTS_PATH: "/products",
    USERS_PATH: "/users",
    LIST_PATH: "/list",
+   ID_PATH: "/:id",
 })

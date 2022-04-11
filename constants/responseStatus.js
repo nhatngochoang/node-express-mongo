@@ -1,4 +1,5 @@
 module.exports = Object.freeze({
+   // https://viblo.asia/p/tim-hieu-ve-http-status-code-lA7GKwx5GKZQ
    //2XX
    OK: {
       isSuccess: true,

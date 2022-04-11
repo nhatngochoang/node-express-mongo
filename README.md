@@ -33,6 +33,17 @@ git add .gitignore
 git commit -m "message" .gitignore
 ```
 
+# Add public and static files
+
+```bash
+npm i path
+```
+
+
+# Router with params ➥ last
+# Middle Chaining like Promise.then() ➥ req go 1 same Router road
+https://www.youtube.com/watch?v=txd2TmXoEn8&list=PLodO7Gi1F7R1GMefX_44suLAaXnaNYMyC&index=4
+
 # JSON WEB TOKEN 🍏 ➥ CMND
 
 git rm .env --cached
@@ -53,5 +64,15 @@ git commit -m "Stopped tracking .env File"
 🚀 refresh token (in cookies) ➨ if access token expires, make a new access token
 
 # AUTHORIZATION
+https://www.youtube.com/watch?v=fiUk7G-QHSQ
 🍌 USER GROUP
 🍉 FUNCTION GROUP
+
+.findByIdAndUpdate(id, {
+   info: newInfoValue
+})
+
+id = req.params.id
+.deleteOne({
+   _id: idParam
+})
