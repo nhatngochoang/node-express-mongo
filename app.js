@@ -10,6 +10,8 @@ import orderRoutes from "./routes/order.js";
 import authRoutes from "./routes/auth.js";
 import userRoutes from "./routes/user.js";
 
+import allRoutes from './routes'
+
 import bodyParser from "body-parser";
 import mongoose from "mongoose";
 import path from 'path'
@@ -57,6 +59,9 @@ app.use("/api", sizeRoutes);
 app.use("/api", sliderRoutes);
 app.use("/api", orderRoutes);
 app.use("/api", userRoutes);
+
+app.use("", allRoutes);
+
 
 // AUTHENTICATION 💣 Signup, Login
 app.use("/api/auth", authRoutes)
