@@ -13,6 +13,7 @@ import userRoutes from "./routes/user.js";
 import allRoutes from './routes'
 
 import bodyParser from "body-parser";
+import session from 'express-session'
 import mongoose from "mongoose";
 import path from 'path'
 import { API_PATH } from "./constants/routeLink.js";
@@ -32,9 +33,27 @@ const app = express();
 const port = process.env.PORT || 8000;
 app.use(bodyParser.json());
 app.use(cors(corsOptions))
-app.use(cookieParser())
+app.use(cookieParser('secret'))
 app.use(express.json())
 
+// Session middleware setup
+app.use(session({
+   secure: 'keyboard cat',
+   resave: false,
+   saveUninitialized: true,
+   cookie: {
+      secure: false // true ➡ https
+   }
+}))
+/*
+app.use(express.cookieSession({
+   key: "mysite.sid.uid.whatever",
+   secret: process.env["SESSION_SECRET"],
+   cookie: {
+     maxAge: 2678400000 // 31 days
+   },
+ }));
+*/
 
 // Connection
 mongoose
@@ -73,5 +92,25 @@ app.use('/public', express.static(path.join(__dirname, '/public')))
 app.listen(port, () => {
    console.log("Server listening on port " + port);
 });
+
+//create session
+app.get('/demo', (req, res) => {
+   if (req.session.views) {
+      req.session.views++
+      res.setHeader('Content-Type', 'text/html')
+      res.write('<p>' + req.session.views + '</p>')
+      res.end()
+   } else {
+      req.session.views = 1
+      res.end('welcome to the session demo. refresh!')
+   }
+})
+
+//delete session
+app.get('/delete', (req, res) => {
+   req.session.destroy()
+   res.json('Delete session')
+})
+
 
 
