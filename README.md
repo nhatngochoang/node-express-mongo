@@ -19,6 +19,7 @@ npm i redux-persist
 ```
 
 # Create jwt_key
+https://www.youtube.com/watch?v=XN6he_7b2rw&list=PLodO7Gi1F7R1GMefX_44suLAaXnaNYMyC&index=18
 ```bash
 ssh-keygen -t rsa -b 4096 -m PEM -f jwtRS256.key
 ```
@@ -63,6 +64,12 @@ git commit -m "Stopped tracking .env File"
 🛰 access token (in headers) ➨ identify who are you
 🚀 refresh token (in cookies) ➨ if access token expires, make a new access token
 
+https://www.w3schools.com/js/js_cookies.asp
+```bash
+npm i express-session
+```
+
+
 # AUTHORIZATION
 https://www.youtube.com/watch?v=fiUk7G-QHSQ
 🍌 USER GROUP
@@ -76,3 +83,30 @@ id = req.params.id
 .deleteOne({
    _id: idParam
 })
+// https://www.youtube.com/watch?v=YB0PrWhGyv8&list=PLodO7Gi1F7R1GMefX_44suLAaXnaNYMyC&index=16
+req.data = data // before next()
+
+# Install WSL 
+https://www.youtube.com/watch?v=Y1Yr10qrOjg
+
+# Install REDIS
+https://www.youtube.com/watch?v=_nFwPTHOMIY
+https://northflank.com/guides/connecting-to-a-redis-database-using-node-js
+https://docs.redis.com/latest/rs/references/client_references/client_nodejs/
+
+sudo apt-get install redis-server
+sudo apt-add-repository ppa:redislabs/redis
+sudo apt-get update
+sudo apt-get upgrade
+sudo apt-get install redis-server
+sudo service redis-server restart
+
+npm i connect-redis redis
+
+# Install SSH
+https://phoenixnap.com/kb/ssh-to-connect-to-remote-server-linux-or-windows
+
+session: phien lam viec client-sever 
+➩ redis store session data
+default: session data store in RAM ➩ redis DB or mongoDB session store express
+to get data from redis ➩ sessionID (base on secret key, store in cookie)

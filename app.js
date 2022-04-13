@@ -21,6 +21,27 @@ import { API_PATH } from "./constants/routeLink.js";
 const cors = require('cors') // Import cors
 const cookieParser = require('cookie-parser')
 
+const redis = require('redis')
+const redisClient = redis.createClient({
+   legacyMode: true
+});
+
+async function run() {
+   await redisClient.auth(process.env.REDIS_PASSWORD, () => {
+      console.log('connected')
+   });
+   await redisClient.connect();
+
+   console.log("Redis connected: ", redisClient.isOpen)
+
+   // await redisClient.disconnect();
+}
+
+run();
+
+const redisStore = require('connect-redis')(session)
+
+
 // Begin Cors Setup
 var corsOptions = {
    origin: 'http://localhost:3000',
@@ -38,11 +59,13 @@ app.use(express.json())
 
 // Session middleware setup
 app.use(session({
-   secure: 'keyboard cat',
+   store: new redisStore({ host: 'localhost', port: 6379, client: redisClient, ttl: 86400 }),
+   secure: process.env.SESSION_SECRET,
    resave: false,
    saveUninitialized: true,
    cookie: {
-      secure: false // true ➡ https
+      secure: false, // true ➡ https
+      maxAge: 2678400000 // 31 days
    }
 }))
 /*
@@ -93,6 +116,8 @@ app.listen(port, () => {
    console.log("Server listening on port " + port);
 });
 
+
+// REDIS: https://www.youtube.com/watch?v=J0qp9rTSQOk&list=PLodO7Gi1F7R1GMefX_44suLAaXnaNYMyC&index=22 - min40
 //create session
 app.get('/demo', (req, res) => {
    if (req.session.views) {
