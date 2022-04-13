@@ -25,6 +25,23 @@ const UserSchema = new mongoose.Schema(
          type: Boolean,
          default: false,
       },
+      phone: {
+         type: String,
+         default: "+84...",
+      },
+      totalOrders: {
+         type: Number,
+         default: 0,
+      },
+      totalSpend: {
+         type: Number,
+         default: 0,
+      },
+      location: {
+         type: String,
+         required: true,
+         default: 'Viet Nam',
+      },
    },
    { timestamps: true }
 );
