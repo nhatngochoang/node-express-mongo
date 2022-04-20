@@ -11,6 +11,26 @@ const userController = {
          res.status(500).json(err);
       }
    },
+
+   //UPDATE USER
+   updateUser: async (req, res) => {
+      try {
+         console.log(req.body);
+         // const user = await User.findByIdAndDelete(req.params.id);
+         const user = await User.findByIdAndUpdate(req.params.id, {
+            username: req.body.username,
+            email: req.body.email,
+            phone: req.body.phone,
+            totalOrders: req.body.totalOrders,
+            totalSpend: req.body.totalSpend,
+            location: req.body.location,
+         });
+         res.status(200).json("Update successfully");
+      } catch (err) {
+         res.status(500).json(err);
+      }
+   },
+
    //DELETE USER
    deleteUser: async (req, res) => {
       try {

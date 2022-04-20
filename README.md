@@ -103,6 +103,8 @@ sudo service redis-server restart
 
 npm i connect-redis redis
 
+Unbutu redis-server / Ctrl C
+
 # Install SSH
 https://phoenixnap.com/kb/ssh-to-connect-to-remote-server-linux-or-windows
 
