@@ -16,7 +16,7 @@ import bodyParser from "body-parser";
 import session from 'express-session'
 import mongoose from "mongoose";
 import path from 'path'
-import { API_PATH } from "./constants/routeLink.js";
+import { API_PATH, API_PATH_V1 } from "./constants/routeLink.js";
 
 const cors = require('cors') // Import cors
 const cookieParser = require('cookie-parser')
@@ -56,6 +56,7 @@ app.use(bodyParser.json());
 app.use(cors(corsOptions))
 app.use(cookieParser('secret'))
 app.use(express.json())
+// app.options('*', cors()) // include before other routes
 
 // Session middleware setup
 app.use(session({
@@ -93,11 +94,11 @@ mongoose.connection.on("Error", (err) => {
    console.log("Error: " + err.message);
 });
 // Routes
-app.use(API_PATH, productRoutes);
-app.use("/api", categoryRoutes);
-app.use("/api", colorRoutes);
+app.use(API_PATH_V1, productRoutes);
+app.use(API_PATH_V1, categoryRoutes);
+app.use(API_PATH_V1, colorRoutes);
 app.use("/api", policyRoutes);
-app.use("/api", sizeRoutes);
+app.use(API_PATH_V1, sizeRoutes);
 app.use("/api", sliderRoutes);
 app.use("/api", orderRoutes);
 app.use("/api", userRoutes);
