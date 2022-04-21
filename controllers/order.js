@@ -30,6 +30,26 @@ export const getByID = async (req, res) => {
    }
 };
 
+export const updateOrder = async (req, res) => {
+   try {
+      const {
+         params: { id },
+      } = req;
+      const orders = await Order.findOneAndUpdate(id, {
+         customer: req.body.customer,
+         address: req.body.address,
+         total: req.body.total,
+         status: req.body.status,
+         method: req.body.method,
+      });
+      res.status(201).json({
+         message: 'Order deleted'
+      });
+   } catch (err) {
+      res.status(500).json(err);
+   }
+};
+
 export const deleteOrder = async (req, res) => {
    try {
       const {
