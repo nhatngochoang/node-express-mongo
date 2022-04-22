@@ -17,3 +17,31 @@ export const get = async (req, res) => {
       res.status(500).json(err);
    }
 };
+
+export const updateCategory = async (req, res) => {
+   const {
+      params: { id },
+   } = req;
+   try {
+      const categories = await Category.findByIdAndUpdate({
+         _id: id
+      }, req.body)
+      res.status(200).json(categories);
+   } catch (err) {
+      res.status(500).json(err);
+   }
+};
+
+export const deleteCategory = async (req, res) => {
+   const {
+      params: { id },
+   } = req;
+   try {
+      const categories = await Category.deleteOne({
+         _id: id
+      })
+      res.status(200).json(categories);
+   } catch (err) {
+      res.status(500).json(err);
+   }
+};
