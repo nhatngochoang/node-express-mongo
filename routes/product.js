@@ -1,5 +1,4 @@
 import express from "express";
-import { PRODUCTS_PATH, API } from "../constants/routeLink.js";
 import { create, getAll, getBySlug, getByCategorySlug } from "../controllers/product.js";
 const router = express.Router();
 
