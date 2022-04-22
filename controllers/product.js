@@ -53,3 +53,27 @@ export const getByCategorySlug = async (req, res) => {
       res.status(500).json(err);
    }
 }
+
+export const update = async (req, res) => {
+   const {
+      params: { id },
+   } = req;
+   try {
+      const product = await Product.findByIdAndUpdate(id, req.body);
+      res.status(200).json(product);
+   } catch (err) {
+      res.status(500).json(err);
+   }
+}
+
+export const deleteProduct = async (req, res) => {
+   const {
+      params: { id },
+   } = req;
+   try {
+      const product = await Product.findByIdAndDelete(id);
+      res.status(200).json('Delete Successful');
+   } catch (err) {
+      res.status(500).json(err);
+   }
+}
