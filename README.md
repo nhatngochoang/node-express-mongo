@@ -79,10 +79,13 @@ https://www.youtube.com/watch?v=fiUk7G-QHSQ
    info: newInfoValue
 })
 
+.find({ username: { $in: [ /son/i ] } });
+
 id = req.params.id
 .deleteOne({
    _id: idParam
 })
+
 // https://www.youtube.com/watch?v=YB0PrWhGyv8&list=PLodO7Gi1F7R1GMefX_44suLAaXnaNYMyC&index=16
 req.data = data // before next()
 

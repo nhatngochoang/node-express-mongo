@@ -77,3 +77,38 @@ export const deleteProduct = async (req, res) => {
       res.status(500).json(err);
    }
 }
+
+export const search = async (req, res) => {
+   const { title } = req.query
+   // console.log(req.query)
+   try {
+
+      const products = await Product.find({ "title": { $regex: `${title}`, '$options': 'i' } });
+      // i => case-insensitive
+      const products2 = await Product.find({ "title": { '$regex': '.*' + title + '.*' } })
+      // .find({key: { $regex: new RegExp(value, 'i')}})
+      const products3 = await Product.aggregate([
+         {
+            $match: {
+               'title': { '$regex': `${title}`, '$options': 'i' }
+            }
+         }
+      ]);
+      // Nested Obj .aggregate({$match: 
+      //   {$and:[
+      //    {"UserObject.Personal.Status":"ACTV"},
+      //    {"UserObject.Personal.Address.Home.Type":"HME"},
+      //    {"UserObject.Personal.Address.Home.Value": /.*son.*/ }
+      //    ]}}
+      //    ) 
+      const products4 = await Product.find({
+         $or: [
+            { 'title': { '$regex': title, '$options': 'i' } },
+            { 'description': { '$regex': title, '$options': 'i' } }
+         ]
+      })
+      res.status(200).json(products);
+   } catch (err) {
+      res.status(500).json(err);
+   }
+}
