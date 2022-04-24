@@ -58,6 +58,7 @@ app.use(cookieParser('secret'))
 app.use(express.json())
 // app.options('*', cors()) // include before other routes
 
+/*
 // Session middleware setup
 app.use(session({
    store: new redisStore({ host: 'localhost', port: 6379, client: redisClient, ttl: 86400 }),
@@ -69,6 +70,8 @@ app.use(session({
       maxAge: 2678400000 // 31 days
    }
 }))
+*/
+
 /*
 app.use(express.cookieSession({
    key: "mysite.sid.uid.whatever",
