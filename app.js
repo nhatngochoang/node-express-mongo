@@ -26,18 +26,18 @@ const redisClient = redis.createClient({
    legacyMode: true
 });
 
-async function run() {
-   await redisClient.auth(process.env.REDIS_PASSWORD, () => {
-      console.log('connected')
-   });
-   await redisClient.connect();
+// async function run() {
+//    await redisClient.auth(process.env.REDIS_PASSWORD, () => {
+//       console.log('connected')
+//    });
+//    await redisClient.connect();
 
-   console.log("Redis connected: ", redisClient.isOpen)
+//    console.log("Redis connected: ", redisClient.isOpen)
 
-   // await redisClient.disconnect();
-}
+//    // await redisClient.disconnect();
+// }
 
-run();
+// run();
 
 const redisStore = require('connect-redis')(session)
 
