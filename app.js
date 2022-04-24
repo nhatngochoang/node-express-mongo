@@ -113,6 +113,12 @@ app.use("/api/auth", authRoutes)
 // PUBLIC
 app.use('/public', express.static(path.join(__dirname, '/public')))
 
+// Home
+app.use('/', (req, res) => {
+   res.json('Homepage')
+})
+
+
 app.listen(port, () => {
    console.log("Server listening on port " + port);
 });
