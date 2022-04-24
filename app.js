@@ -44,8 +44,8 @@ const redisStore = require('connect-redis')(session)
 
 // Begin Cors Setup
 var corsOptions = {
-   // origin: 'http://localhost:3000',
-   origin: 'https://m2-ecommerce-shop-p27udvmxf-tahn-0102.vercel.app',
+   origin: 'http://localhost:3000',
+   // origin: 'https://m2-ecommerce-shop-p27udvmxf-tahn-0102.vercel.app',
    optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
 }
 

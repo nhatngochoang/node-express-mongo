@@ -115,3 +115,9 @@ session: phien lam viec client-sever
 ➩ redis store session data
 default: session data store in RAM ➩ redis DB or mongoDB session store express
 to get data from redis ➩ sessionID (base on secret key, store in cookie)
+
+# Deploy Heroku Command
+
+git add .
+git commit -am "Deploy ver X"
+git push heroku main
