@@ -44,8 +44,8 @@ const redisStore = require('connect-redis')(session)
 
 // Begin Cors Setup
 var corsOptions = {
-   // origin: 'http://localhost:3000',
-   origin: 'https://m2-ecommerce-shop-p27udvmxf-tahn-0102.vercel.app',
+   origin: 'http://localhost:3000',
+   // origin: 'https://m2-ecommerce-shop-5m8c164m1-tahn-0102.vercel.app',
    optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
 }
 
@@ -111,17 +111,11 @@ app.use("", allRoutes);
 
 
 // AUTHENTICATION 💣 Signup, Login
-app.use("/api/auth", authRoutes)
+app.use(`${API_PATH_V1}/auth`, authRoutes)
 // AUTHORIZATION  💣 phân quyền
 
 // PUBLIC
 app.use('/public', express.static(path.join(__dirname, '/public')))
-
-// Home
-app.use('/', (req, res) => {
-   res.json('Homepage')
-})
-
 
 app.listen(port, () => {
    console.log("Server listening on port " + port);
