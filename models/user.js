@@ -29,10 +29,12 @@ const UserSchema = new mongoose.Schema(
          type: String,
          default: "+84...",
       },
-      totalOrders: {
-         type: Number,
-         default: 0,
-      },
+      orders: [
+         {
+            type: String,
+            maxlength: 100,
+         }
+      ],
       totalSpend: {
          type: Number,
          default: 0,

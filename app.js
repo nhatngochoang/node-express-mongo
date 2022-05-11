@@ -3,12 +3,15 @@ import dotenv from "dotenv";
 import productRoutes from "./routes/product.js";
 import categoryRoutes from "./routes/category.js";
 import colorRoutes from "./routes/color.js";
+import authorizationRoutes from "./routes/authorization.js";
 import policyRoutes from "./routes/policy.js";
 import sizeRoutes from "./routes/size.js";
 import sliderRoutes from "./routes/slider.js";
 import orderRoutes from "./routes/order.js";
 import authRoutes from "./routes/auth.js";
 import userRoutes from "./routes/user.js";
+import contactRoutes from "./routes/contact.js";
+
 
 import allRoutes from './routes'
 
@@ -16,6 +19,7 @@ import bodyParser from "body-parser";
 import session from 'express-session'
 import mongoose from "mongoose";
 import path from 'path'
+const nodemailer = require("nodemailer");
 import { API_PATH, API_PATH_V1 } from "./constants/routeLink.js";
 
 const cors = require('cors') // Import cors
@@ -45,7 +49,7 @@ const redisStore = require('connect-redis')(session)
 // Begin Cors Setup
 var corsOptions = {
    // origin: 'http://localhost:3000',
-   origin: 'https://m2-ecommerce-shop-rg88bo0br-tahn-0102.vercel.app',
+   origin: 'https://m2-ecommerce-shop-6nv939ahw-tahn-0102.vercel.app',
    optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
 }
 
@@ -101,11 +105,15 @@ mongoose.connection.on("Error", (err) => {
 app.use(API_PATH_V1, productRoutes);
 app.use(API_PATH_V1, categoryRoutes);
 app.use(API_PATH_V1, colorRoutes);
+app.use(API_PATH_V1, authorizationRoutes);
+app.use(API_PATH_V1, contactRoutes);
+
 app.use("/api", policyRoutes);
 app.use(API_PATH_V1, sizeRoutes);
 app.use("/api", sliderRoutes);
 app.use("/api", orderRoutes);
 app.use("/api", userRoutes);
+
 
 app.use("", allRoutes);
 
@@ -142,5 +150,21 @@ app.get('/delete', (req, res) => {
    res.json('Delete session')
 })
 
+// COntact Email
+export const contactEmail = nodemailer.createTransport({
+   service: 'gmail',
+   auth: {
+      user: "ongthothienbinh2@gmail.com",
+      pass: "Dacnhantam1",
+   },
+});
+
+contactEmail.verify((error) => {
+   if (error) {
+      console.log(error);
+   } else {
+      console.log("Ready to Send");
+   }
+});
 
 

@@ -7,8 +7,14 @@ const router = express.Router();
 // get all
 router.get("/users", middleware.verifyToken, userController.getAllUsers);
 
+// get all
+router.get("/userslist/:id", userController.getUserByID);
+
 // update
 router.put("/users/:id", userController.updateUser);
+
+// update
+router.patch("/users/:id", userController.updateUserTotalSpend);
 
 // delete
 router.delete("/users/:id", middleware.verifyTokenAdmin, userController.deleteUser);
